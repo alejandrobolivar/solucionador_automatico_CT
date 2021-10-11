@@ -17,8 +17,8 @@ from librerias.lib_IdVar import dividir_datos
 
 
 def create_network(max_words, num_classes, n_dense=1, dense_units=256,
-                   activation='selu', dropout=AlphaDropout, dropout_rate=0.5,
-                   kernel_initializer='lecun_normal', optimizer='adam'):
+activation='selu', dropout=AlphaDropout, dropout_rate=0.5,
+kernel_initializer='lecun_normal', optimizer='adam'):
     """Generic function to create a fully-connected neural network.
     # Arguments
         n_dense: int > 0. Number of dense layers.
@@ -53,24 +53,22 @@ def create_network(max_words, num_classes, n_dense=1, dense_units=256,
     model.add(Dense(num_classes))
     #5 Capa - Agrega una capa de activación de tipo softmax
     model.add(Activation('softmax')) # Aplica la función de activación softmax
-    # Se le indica al modelo el tipo de pérdida (loss), el optimizador de los 
+    # Se le indica al modelo el tipo de pérdida (loss), el optimizador de los
     # pesos de las conexiones de las neuronas y las metricas a obtener
-    model.compile(loss='categorical_crossentropy', # Entropía cruzada
-                  optimizer=optimizer, # Optimizador
-                  metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy',optimizer=optimizer,
+    metrics=['accuracy']) # Entropía cruzada, Optimizador
     model.summary()
     return model
 
 
 def filtros1(e): # Filtros aplicados a los enunciados
-    
     # Convierte el texto en minúsculas
     # e['enunciados'] = e['enunciados'].str.lower()
     # print ('Convertido en minúsculas\n', e['enunciados'][0])
     # print("\n")
-    
+
     e['enunciados']=e['enunciados'].str.replace('[:,¿?()=]²', ' ')
-    
+
     #Elimina las palabras vacías en español
     stop = stopwords.words('spanish')
     e['enunciados'] = e['enunciados'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
@@ -83,8 +81,7 @@ def filtros1(e): # Filtros aplicados a los enunciados
     # print("\n")
 
 
-def plot_confusion_matrix(cm, classes, title='Confusion matrix',
-                          cmap=plt.cm.Blues):
+def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blues):
     # This utility function is from the sklearn docs: http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html
     """
     This function prints and plots the confusion matrix.
