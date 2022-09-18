@@ -1,23 +1,23 @@
 ﻿nombrevar_simbolotrab|unidad_trab|simbolo_si|unidad_si|
+aceleración angular:alfa|rad/s²,rev/min²|alfa|rad/s²
+aceleración:a,g:g,aceleración gravedad:g,aceleración media:am,aceleración tangencial:at,aceleración centrípeta:ac|m/s²,ft/s²|a|m/s²
+ángulo:ang|º|ang|º
+calor:q|kJ/kg,btu/lbm|q|kJ/kg
+coeficiente fricción:uk| |uk| 
 distancia:d,radio:r,diámetro:d,altura:y,profundidad:y,mide:l,longitud:l,posición:x,posición inicial:xi,posición final:xf,altura máxima:ymax,alcance horizontal:alc,alcance máximo:alcmax|m,cm,km,ft,pulg|d|m
+entalpia:h|kJ/kg|h|kJ/kg
+entropia turbina:st,entropia bomba:sb|kJ/kg K|s|kJ/kg K
+flujo másico:fm|kg/h,kg/s|fm|kg/h
+flujo volumétrico aire:fv|m3/min,m3/s,pie3/min,ft3/min|fv|m3/s
+fuerza centrípeta:Fc,fuerza:F,tensión:T|N,lbf|F|N
+masa:m|kg,lb,g|m|kg
+número revoluciones:n|rev|n|rev
+potencia neta:Wneta|MW,kW,hp|Pot|MW
+presión:P, presión media efectiva:P|Mpa,kPa,bar,psia|P|kPa
+relación compresión:rc| |rc| 
+relación presiones:rp| |rp| 
+temperatura:T|ºC,R,ºF,K|T|K
+tiempo:t,tarda:t,tiempo vuelo:tv,tiempo máximo:tmax|s,min,h|t|s
 velocidad angular:w|rpm,rev/s,rad/s|w|rad/s
 velocidad:v,velocidad final:vf,velocidad inicial:vi,velocidad media:vm,velocidad promedio:vm,velocidad tangencial:vt,velocidad máxima:vmax,velocidad mínima:vmin|m/s,cm/s,km/h,ft/s,mi/h|v|m/s
-aceleración:a,g:g,aceleración gravedad:g,aceleración media:am,aceleración tangencial:at,aceleración centrípeta:ac|m/s²,ft/s²|a|m/s²
-aceleración angular:alfa|rad/s²,rev/min²|alfa|rad/s²
-tiempo:t,tarda:t,tiempo vuelo:tv,tiempo máximo:tmax|s,min,h|t|s
-número revoluciones:n|rev|n|rev
-ángulo:ang|º|ang|º
-masa:m|kg,lb,g|m|kg
-fuerza centrípeta:Fc,fuerza:F,tensión:T|N,lbf|F|N
-coeficiente fricción:uk| |uk| 
-temperatura:T|ºC,R,ºF,K|T|K
-presión:P, presión media efectiva:P|Mpa,kPa,bar,psia|P|kPa
-flujo másico:fm|kg/h,kg/s|fm|kg/h
-potencia neta:Wneta|MW,kW,hp|Pot|MW
-calor:q|kJ/kg,btu/lbm|q|kJ/kg
-relación compresión:rc| |rc| 
-flujo volumétrico aire:fv|m3/min,m3/s,pie3/min,ft3/min|fv|m3/s
-entropia turbina:st,entropia bomba:sb|kJ/kg K|s|kJ/kg K
 volumen cilindro:volcil|L,m3|V|m3
-relación presiones:rp| |rp| 
-entalpia:h|kJ/kg|h|kJ/kg
