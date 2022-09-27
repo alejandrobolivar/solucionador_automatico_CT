@@ -1,0 +1,6 @@
+﻿ecuaciones
+vi + a*t - vf
+xi + 1/2*(vi + vf)*t - xf
+xi + vi*t + 1/2*(a*(t**2)) - xf
+vi**2 + 2*a*(xf - xi) - vf**2
+xf - xi -d

@@ -4,6 +4,8 @@ Created on Sun Dec 17 22:40:58 2017
 @author: bolivar
 
 """
+#pip install keras
+#pip install tensorflow
 
 # Se importa las librerias requeridas
 

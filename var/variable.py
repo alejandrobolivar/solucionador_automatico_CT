@@ -1,4 +1,4 @@
-''' Clase para definir ls variable mediante sus atributos'''
+''' Clase para definir las variable mediante sus atributos'''
 class Unidad():
     '''Clase para definir las unidades mediante sus atributos'''
     def __init__(self, simbolo, nombre, lstunidades):

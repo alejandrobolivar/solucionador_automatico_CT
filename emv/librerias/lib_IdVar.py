@@ -606,3 +606,35 @@ def detectar_vars(data, dfvar):
         #input('Siguiente enunciado')
     print_resultados_variables(contaciertosindep, conttotalvarindep, contaciertosdep, conttotalvardep)
     print_resultados_enunciados(contninguno, conttotal, contindep, contdep, contambos, lst_ninguno, lst_fallaindep, lst_falladep)
+
+
+def test():
+    import pandas as pd
+    data = pd.read_csv('emv/dataset/enunciadosCT.csv',sep='|')
+    dfvar = pd.read_csv('emv/dataset/listadevariables2.csv', sep='|')
+    filtros2(data)
+    
+    descripción = dfvar['nombrevar_simbolotrab'] # Nombre de la variable
+    unidades_trab = dfvar['unidad_trab'] # Unidades de trabajo
+    variable = dfvar['simbolo_si'] # Símbolo según el SI
+    unidades_si = dfvar['unidad_si'] # Unidades según el SI
+
+    lst_enunciado = []  # Lista de oraciones en el enunciado
+    lst_oracion = []  # Lista de palabras de la oración en el enunciado
+    
+    lst_dep = []  # Lista para almacenar variables dependientes
+    lst_indep = []  # Lista para almacenar variables in dependientes
+        
+    # Enunciado convertido en lista cuyos elementos son oraciones.
+    lst_enunciado = data['enunciados'][0].split('. ')
+    
+    contoracion = 0
+    for contoracion in range(len(lst_enunciado)):
+        lst_oracion = lst_enunciado[contoracion].split() 
+        analizar_oracion(lst_oracion, unidades_trab, descripción, 
+                         unidades_si, variable, lst_dep, lst_indep)
+    
+    print('Identificados')
+    print('Datos de Entrada:\n',lst_indep)
+    print('Calcular:\n',lst_dep)
+    input()

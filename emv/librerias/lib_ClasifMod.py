@@ -56,7 +56,7 @@ kernel_initializer='lecun_normal', optimizer='adam'):
     # Se le indica al modelo el tipo de pérdida (loss), el optimizador de los
     # pesos de las conexiones de las neuronas y las metricas a obtener
     model.compile(loss='categorical_crossentropy',optimizer=optimizer,
-    metrics=['accuracy']) # Entropía cruzada, Optimizador
+                  metrics=['accuracy']) # Entropía cruzada, Optimizador
     model.summary()
     return model
 
@@ -66,8 +66,8 @@ def filtros1(e): # Filtros aplicados a los enunciados
     # e['enunciados'] = e['enunciados'].str.lower()
     # print ('Convertido en minúsculas\n', e['enunciados'][0])
     # print("\n")
-
-    e['enunciados']=e['enunciados'].str.replace('[:,¿?()=]²', ' ')
+    # Reemplaza los símbolos por espacio en blanco
+    e['enunciados'] = e['enunciados'].str.replace('[:,¿?()=]²', ' ')
 
     #Elimina las palabras vacías en español
     stop = stopwords.words('spanish')
@@ -76,7 +76,7 @@ def filtros1(e): # Filtros aplicados a los enunciados
     # print("\n")
 
     #Elimina varios espacios seguidos por uno solo
-    e['enunciados']=e['enunciados'].str.replace('\s+', ' ')
+    e['enunciados'] = e['enunciados'].str.replace('\s+', ' ')
     # print('Elimina varios espacios seguidos\n', e['enunciados'][0])
     # print("\n")
 
@@ -103,13 +103,46 @@ def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blu
     plt.xlabel('Predicted label', fontsize=12)
 
 
+def plot_history(history):
+
+    plt.figure(figsize=(11, 5))
+
+    history_dict = history.history
+
+    acc = history_dict['accuracy']
+    val_acc = history_dict['val_accuracy']
+    loss = history_dict['loss']
+    val_loss = history_dict['val_loss']
+
+    # loss
+    
+    plt.subplot(1, 2, 1)
+    epochs = range(1, len(acc) + 1)
+
+    plt.plot(epochs, loss, 'ko', label='Perdida Entrenamiento')
+    plt.plot(epochs, val_loss, 'k', label='Perdida Validacion')
+    plt.title('Pérdida Entrenamiento y validacion')
+    plt.xlabel('Epocas')
+    plt.ylabel('Pérdida')
+    plt.legend()
+
+    # accuracy
+    
+    plt.subplot(1, 2, 2)
+    plt.plot(epochs, acc, 'ko', label='Entrenamiento prec')
+    plt.plot(epochs, val_acc, 'k', label='Validacion prec')
+    plt.title('Precision Entrenamiento y validación')
+    plt.xlabel('Epocas')
+    plt.ylabel('Precisión')
+    plt.legend(loc='lower right')    
+    
 def clasificador(data):
 
     # Parámetros
-    max_words = 50
+    max_words = 40
     batch_size = 3
     epochs = 8
-    plot = True
+    # plot = True
 
     # Prueba
     network = {
@@ -137,7 +170,7 @@ def clasificador(data):
     train_size = 0
 
     # Creación de los arrays de entrada y salida
-    train_size,test_size,enunciado_train,modelo_train,enunciado_test,modelo_test=dividir_datos(0.9,data)
+    train_size,test_size,enunciado_train,modelo_train,enunciado_test,modelo_test = dividir_datos(0.9,data)
 
     # Vectorizar los enunciados en un tensor de enteros 2D
     #print("Preparando el Tokenizer...")
@@ -194,8 +227,11 @@ def clasificador(data):
     # Because val_loss is no longer decreasing we stop training to prevent overfitting
     # Para entrenar la red, se indicas las entradas, sus salidas y la cantidad de 
     # iteraciones de aprendizaje (epochs) de entrenamiento
-    history = model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs,
-                        verbose=1, validation_split=0.1)
+    history = model.fit(x_train, y_train, 
+                        batch_size=batch_size, 
+                        epochs=epochs,
+                        verbose=1, 
+                        validation_split=0.1)
     # Evalúa la precisión del modelo entrenado
     score = model.evaluate(x_test, y_test, batch_size=batch_size, verbose=1)
     print('\n')
@@ -257,6 +293,7 @@ def clasificador(data):
     plt.savefig('networks.png')
 
     plt.figure(2)
+    '''
     plt.plot(range(epochs), history.history['loss'], 'g--', label='Loss')
     plt.plot(range(epochs), history.history['val_loss'], 'g-', label='Val Loss')
     plt.plot(range(epochs), history.history['acc'], 'b--', label='Acc')
@@ -266,3 +303,6 @@ def clasificador(data):
     plt.legend()
     plt.twinx()
     plt.ylabel('acc')
+    '''
+    # plt.style.use('ggplot')
+    plot_history(history)
