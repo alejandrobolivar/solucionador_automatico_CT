@@ -208,9 +208,9 @@ def clasificador(data):
     for i in range(test_size):
         prediction = model.predict(np.array([x_test[i]]))
         predicted_label = text_labels[np.argmax(prediction)]
-        print(str(i) + ' ' + enunciado_test.iloc[i][:50], '...')
-        print('Actual modelo:' + modelo_test.iloc[i])
-        print("Predicted modelo: " + predicted_label + "\n")
+        print(f'{str(i)} {enunciado_test.iloc[i][:50]}', '...')
+        print(f'Actual modelo:{modelo_test.iloc[i]}')
+        print(f"Predicted modelo: {predicted_label}" + "\n")
 
     #enunciado='¿Cuánto tiempo tarda un auto en acelerar desde el reposo hasta 22.2 m/s si la aceleración es constante y el auto avanza 243 m durante el periodo de aceleración?'
     #enunciado=input('Enunciado:')
@@ -246,7 +246,7 @@ def clasificador(data):
         index_arr = np.nonzero(probs)
         one_hot_index = index_arr[0].item(0)
         y_test_1d.append(one_hot_index)
-    for i in range(0, len(y_softmax)):
+    for i in range(len(y_softmax)):
         probs = y_softmax[i]
         predicted_index = np.argmax(probs)
         y_pred_1d.append(predicted_index)
