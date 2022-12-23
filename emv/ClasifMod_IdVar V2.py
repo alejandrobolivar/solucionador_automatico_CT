@@ -20,7 +20,7 @@ from librerias.lib_ClasifMod import clasificador
 # print("numpy version", np.__version__)
 # print("pandas version", pd.__version__)
 print("Leyendo datos de entrenamiento...")
-data = pd.read_csv('dataset/enunciadosCT.csv',sep='|') # ,encoding = "ISO-8859-1"
+data = pd.read_csv('dataset/enunciadosCT.csv',sep=';') # ,encoding = "ISO-8859-1"
 
 clasificador(data)
 
