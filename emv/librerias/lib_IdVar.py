@@ -140,7 +140,7 @@ def conteo(lst1, lst2):
 
 def convertir_str_list(cad, n):
     '''
-    convertir_str_list, Convierte una cadena cad en una lista de listas, donde 
+    convertir_str_list, Convierte una cadena cad en una lista de listas, donde
     cada lista interna esta conformada por n elementos.
     Input:
         cad, cadena a convertir en una lista de listas.
@@ -221,7 +221,7 @@ def es_numero(cad):
 
 def es_unidad_simbtrab(unid, unid_simb_trab):
     '''
-    es_unidad_simbtrab, verifica si el parámetro unidad es una unidad válida 
+    es_unidad_simbtrab, verifica si el parámetro unidad es una unidad válida
     buscándola en la lista Lista_unidad_simb_trab que contiene todas las unidades
     de medida relaciondas al identificador de la variable.
 
@@ -420,10 +420,13 @@ def llenarlistadatos(lstDatos, oracion, contpalabra, descripción):
             f'{oracion[contpalabra]} {oracion[contpalabra + 1]}', descripción
         )
         != -1
-    ): 
+    ):
         lstDatos = [oracion[contpalabra], oracion[contpalabra+1], oracion[contpalabra+2], oracion[contpalabra+3].replace('.', ''), '', '']
 
-    elif (contpalabra < len(oracion)-2 and (get_indice_simbolo_trab(oracion[contpalabra], descripción) != -1)):
+    elif (
+        contpalabra < len(oracion)-2
+        and (get_indice_simbolo_trab(oracion[contpalabra], descripción) != -1)
+    ):
         lstDatos = ['', oracion[contpalabra], oracion[contpalabra+1], oracion[contpalabra+2].replace('.',''), '','']
 
     elif (contpalabra < len(oracion)-3 and (es_numero(oracion[contpalabra]))):
