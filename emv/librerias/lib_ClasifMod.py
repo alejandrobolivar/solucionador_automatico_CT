@@ -12,9 +12,6 @@ from keras.layers.noise import AlphaDropout
 from keras.layers import Dense, Activation, Dropout
 from keras.models import Sequential
 
-# Se importa las librerias propias
-from librerias.lib_IdVar import dividir_datos
-
 
 def create_network(max_words, num_classes, n_dense=1, dense_units=256,
 activation='selu', dropout=AlphaDropout, dropout_rate=0.5,
@@ -61,13 +58,43 @@ kernel_initializer='lecun_normal', optimizer='adam'):
     return model
 
 
+def dividir_datos(porc_train, data):
+
+    # División de los datos para entrenamiento y prueba
+    '''
+    Input:
+        porc_train: porcentaje de división de datos
+        data: dataframe panda con los datos de los enunciados
+    Output:
+        train_size
+        test_size
+        enunciado_train
+        modelo_train
+        enunciado_test
+        modelo_test
+    '''
+    train_size = int(len(data) * porc_train)
+    print ("Train size: %d" % train_size)
+
+    test_size = len(data) - train_size
+    print ("Test size: %d" % test_size)
+
+    enunciado_train = data['enunciados'][:train_size]
+    modelo_train = data['modelos'][:train_size]
+
+    enunciado_test = data['enunciados'][train_size:]
+    modelo_test = data['modelos'][train_size:]
+
+    return train_size, test_size, enunciado_train, modelo_train, enunciado_test, modelo_test
+
+
 def filtros1(e): # Filtros aplicados a los enunciados
     # Convierte el texto en minúsculas
     # e['enunciados'] = e['enunciados'].str.lower()
     # print ('Convertido en minúsculas\n', e['enunciados'][0])
     # print("\n")
     # Reemplaza los símbolos por espacio en blanco
-    e['enunciados'] = e['enunciados'].str.replace('[:,¿?()=]²', ' ')
+    e['enunciados'] = e['enunciados'].str.replace('[:,¿?()=²]', ' ', regex=True)
 
     #Elimina las palabras vacías en español
     stop = stopwords.words('spanish')
@@ -76,7 +103,7 @@ def filtros1(e): # Filtros aplicados a los enunciados
     # print("\n")
 
     #Elimina varios espacios seguidos por uno solo
-    e['enunciados'] = e['enunciados'].str.replace('\s+', ' ')
+    e['enunciados'] = e['enunciados'].str.replace(r'\s+', ' ', regex=True)
     # print('Elimina varios espacios seguidos\n', e['enunciados'][0])
     # print("\n")
 
@@ -141,7 +168,7 @@ def clasificador(data):
     # Parámetros
     max_words = 50
     batch_size = 3
-    epochs = 50
+    epochs = 8
     # plot = True
 
     # Prueba

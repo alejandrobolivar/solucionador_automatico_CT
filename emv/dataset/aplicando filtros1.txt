@@ -1,0 +1,5 @@
+antes
+A la turbina de un ciclo Rankine ideal entra vapor sobrecalentado a 30 bar y 500 ºC y sale del condensador como líquido saturado a 0.1 bar. Determínese (a) el rendimiento térmico. (b) el flujo másico de vapor necesario en kg/h. (c) el flujo de calor suministrado al ciclo en MW, y (d) el flujo másico de agua de refrigeración en kg/h si ésta aumenta su temperatura desde 18 hasta 28 ºC. La potencia neta de salida es 100 MW.;Rankine;P3=30 bar, T3= 500 ºC, P4=0.1 bar;ntermico, fmvapor, qe, fm;x4=0.878, h4=2292.7 kJ/kg, ws=1163.8 kJ/kg, we= 3 kJ/kg, h2=194.8 kJ/kg, qe=3261.6 kJ/kg, nt=35.58%, fmvapor=3.11E5 kg/h, qe=281000 kW, fmaguaenf=15.56E6 kg/h
+
+después
+A turbina ciclo Rankine ideal entra vapor sobrecalentado 30 bar 500 ºC sale condensador líquido saturado 0.1 bar. Determínese (a) rendimiento térmico. (b) flujo másico vapor necesario kg/h. (c) flujo calor suministrado ciclo MW, (d) flujo másico agua refrigeración kg/h si ésta aumenta temperatura 18 28 ºC. La potencia neta salida 100 MW.

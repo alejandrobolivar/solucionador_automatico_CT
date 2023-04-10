@@ -34,45 +34,23 @@ def analizar_oracion(oracion, unidades_trab, descripción, unidades_si, variable
     contpalabra = 0
 
     print(oracion)
-    input()
+    # input('analizar_oracion')
     while (contpalabra <= len(oracion)-1): # Recorre todas las parabras de las lista de palabras de la oración
         # print(oracion[contpalabra])
         # input()
 
-        if (
-            get_indice_simbolo_trab(
-                oracion[contpalabra].replace('.', ''), descripción
+        if (get_indice_simbolo_trab(oracion[contpalabra].replace('.',''), descripción) != -1 or 
+            (contpalabra < len(oracion)-1 and get_indice_simbolo_trab(oracion[contpalabra] + ' ' + oracion[contpalabra+1].replace('.',''), descripción) != -1) or
+            (es_numero(oracion[contpalabra]) and (oracion[contpalabra-1] != 'figura' and oracion[contpalabra-1] != 'tabla') and 
+            (contpalabra<len(oracion)-1 and get_indice_unidad_trab(oracion[contpalabra+1].replace('.', ''), unidades_trab) != -1)
             )
-            != -1
-            or contpalabra < len(oracion) - 1
-            and get_indice_simbolo_trab(
-                f'{oracion[contpalabra]} '
-                + oracion[contpalabra + 1].replace('.', ''),
-                descripción,
-            )
-            != -1
-            or (
-                es_numero(oracion[contpalabra])
-                and (
-                    oracion[contpalabra - 1] != 'figura'
-                    and oracion[contpalabra - 1] != 'tabla'
-                )
-                and (
-                    contpalabra < len(oracion) - 1
-                    and get_indice_unidad_trab(
-                        oracion[contpalabra + 1].replace('.', ''),
-                        unidades_trab,
-                    )
-                    != -1
-                )
-            )
-        ):
+            ):
 
             lstDatos = ['','','','','','']
             lstDatos = llenarlistadatos(lstDatos, oracion, contpalabra, descripción)
             # print(contpalabra,len(oracion),oracion)
             print('lstDatos->', lstDatos)
-            input()
+            # input()
             caso = es_var_independiente(lstDatos, unidades_trab, descripción)
             # print(caso)
 
@@ -89,9 +67,6 @@ def analizar_oracion(oracion, unidades_trab, descripción, unidades_si, variable
 
 # devuelve la cantidad de elementos que son comunes en ambas listas
 
-
-
-
 def conteo(lst1, lst2):
     '''
     conteo, devuelve la cantidad de elementos que son comunes en ambas listas.
@@ -100,8 +75,8 @@ def conteo(lst1, lst2):
         lst2, lista anidada de variables identificadas
     Output
         c: cantidad de coincidencias entre las listas
+    
     '''
-
     #Referencia lst1
     #Identificado lst2
     #if len(lst2)>len(lst1):
@@ -136,7 +111,7 @@ def conteo(lst1, lst2):
         #print(nl1-c,' desaciertos')
     # print(c, ' aciertos')
     return c
-
+    
 
 def convertir_str_list(cad, n):
     '''
@@ -170,53 +145,20 @@ def convertir_str_list(cad, n):
     return(lst3)
 
 
-def dividir_datos(porc_train, data):
-
-    # División de los datos para entrenamiento y prueba
-    '''
-    Input:
-        porc_train: porcentaje de división de datos
-        data: dataframe panda con los datos de los enunciados
-    Output:
-        train_size
-        test_size
-        enunciado_train
-        modelo_train
-        enunciado_test
-        modelo_test
-    '''
-    train_size = int(len(data) * porc_train)
-    print ("Train size: %d" % train_size)
-
-    test_size = len(data) - train_size
-    print ("Test size: %d" % test_size)
-
-    enunciado_train = data['enunciados'][:train_size]
-    modelo_train = data['modelos'][:train_size]
-
-    enunciado_test = data['enunciados'][train_size:]
-    modelo_test = data['modelos'][train_size:]
-
-    return train_size, test_size, enunciado_train, modelo_train, enunciado_test, modelo_test
-
-
 def es_numero(cad):
     '''
-    es_numero, verifica si s es un número o no
+    es_numero, verifica si cad es un número entero o real o ninguno
     Input:
-        cad, es la cadena a verificar si es un número válido.
+        cad, es la cadena a verificar si es un número válido entero o real.
     Output:
         True, es un número.
         False, no es un número
     '''
     try:
         float(cad) # for int, long and float
+        return True
     except ValueError:
-        try:
-            complex(cad) # for complex
-        except ValueError:
-            return False
-    return True
+        return False
 
 
 def es_unidad_simbtrab(unid, unid_simb_trab):
@@ -292,51 +234,27 @@ def es_var_independiente(lstDatos,unidades_trab,descripción):
     return caso
 
 
-def filtros2(e):  # sourcery skip: avoid-builtin-shadow
-    """
+def file_to_dict(file_name):
+    result_dict = {}
+    with open(file_name) as f:
+        for line in f:
+            key, val = line.strip().split(':')
+            result_dict[key.strip()] = val.strip()
+    return result_dict
+
+
+def filtros2(e, dict):  # sourcery skip: avoid-builtin-shadow
+    ''''
     Devuelve los enunciados con los símbolos de unidades,
     caracteres especiales y palabras compuestas reemplazados
     por la descripción según el sistema internacional de unidades
-    """
-    dict = {'tiempo tarda':'tiempo ','tiempo tardo':' tiempo',
-          'cuánto tiempo':'tiempo','cuanto tardo':' tiempo',
-          'cuánto demora':'tiempo','cuanto demora':' tiempo ',
-          'distancia recorre':' distancia ','distancia recorrido':' distancia',
-          'distancia recorrida':' distancia','cuán lejos':' distancia',
-          'desplazamiento realizado':'distancia','cuánto desplaza':'distancia',
-          'máxima altura':'altura máxima',
-          'rapidez':'velocidad',
-          'máxima velocidad':' velocidad máxima',
-          'm/s cada segundo':'m/s²','metros por segundo':'m/s','segundos':' s ',' seg':' s ',
-          'metros':'m',
-          'alcanzar reposo':'velocidad final 0 m/s',
-          'hasta detenerse':'velocidad final 0 m/s',
-          'detenerse completo':'velocidad final 0 m/s',
-          'detiene completo':'velocidad final 0 m/s',
-          'reposo':'velocidad inicial 0 m/s',
-          'velocidad uniformemente':'velocidad',
-          'aceleración debida':'aceleración',
-          'aceleración permanece constante':'aceleración',
-          'x10^':'E',
-          ' dos ':' 2 ','tres':'3','cuatro':'4','cinco':'5','seis':'6','siete':'7',
-          'ocho':'8','nueve':'9','diez':'10','duodécimo':'12',
-          'º':' º ',
-          'cuántos radianes':'ángulo',
-          'ángulo inclinación':'ángulo',
-          'cuántas revoluciones':'número revoluciones',
-          'número vueltas':'número revoluciones',
-          'qué tan rápido gira':'w',
-          'cuánto pesará':'masa',
-          }
+    '''
 
     for i in range(len(e['enunciados'])):  # Recorre todos los enunciados
 
         for key, val in dict.items():  # Recorre el diccionario de variables
 
             e['enunciados'][i] = e['enunciados'][i].replace(key, val)
-
-        print ('Simplificación ortografica %s \n',i,') ', e['enunciados'][i])
-        print("\n")
 
 
 def get_indice_simbolo_trab(cad_descripcionvartrab, descripción):
@@ -350,6 +268,11 @@ def get_indice_simbolo_trab(cad_descripcionvartrab, descripción):
         de una posible variable.
         descripción, es una lista que contiene nombrevar_simbolotrab extraído de listadevariables2.csv
 
+    for i, desc in enumerate(descripcion):
+        simbolos_trab = [var.split(':')[0] for var in desc.split(',')]
+        if cad_descripcionvartrab in simbolos_trab:
+            return i
+    return -1
     '''
 
     for i in range(len(descripción)):
@@ -504,42 +427,18 @@ def set_simbolo_trab(lstDatos, caso, contpalabra, oracion, descripción):
 def set_var_dep(dep, oracion, contpalabra, descripción, unidades_si, variable):
 
     # Se verifica que el identificador de dos palabras corresponda a una variable válida
-    if (
-        contpalabra < len(oracion) - 1
-        and get_indice_simbolo_trab(
-            f'{oracion[contpalabra]} '
-            + oracion[contpalabra + 1].replace('.', ''),
-            descripción,
-        )
-        != -1
-    ):
-        simbolo_trab = get_simbolo_trab(
-            f'{oracion[contpalabra]} '
-            + oracion[contpalabra + 1].replace('.', ''),
-            descripción,
-        )
-        unidad_si = unidades_si[
-            get_indice_simbolo_trab(
-                f'{oracion[contpalabra]} '
-                + oracion[contpalabra + 1].replace('.', ''),
-                descripción,
-            )
-        ]
-        simbolo_si = variable[
-            get_indice_simbolo_trab(
-                f'{oracion[contpalabra]} '
-                + oracion[contpalabra + 1].replace('.', ''),
-                descripción,
-            )
-        ]
+    if contpalabra < len(oracion)-1 and get_indice_simbolo_trab(oracion[contpalabra] + ' ' + oracion[contpalabra+1].replace('.',''), descripción) != -1:
+        simbolo_trab = get_simbolo_trab(oracion[contpalabra] + ' ' + oracion[contpalabra+1].replace('.',''), descripción)
+        unidad_si = unidades_si[get_indice_simbolo_trab(oracion[contpalabra] + ' ' + oracion[contpalabra+1].replace('.',''), descripción)]
+        simbolo_si = variable[get_indice_simbolo_trab(oracion[contpalabra] + ' ' + oracion[contpalabra+1].replace('.',''), descripción)]
         oracion.pop(contpalabra + 1)
-
+        oracion.pop(contpalabra)
+    
     else:
         simbolo_trab = get_simbolo_trab(oracion[contpalabra].replace('.',''), descripción)
         unidad_si = unidades_si[get_indice_simbolo_trab(oracion[contpalabra].replace('.',''), descripción)]
         simbolo_si = variable[get_indice_simbolo_trab(oracion[contpalabra].replace('.',''), descripción)]
-
-    oracion.pop(contpalabra)
+        oracion.pop(contpalabra)
     dep.append([simbolo_si, simbolo_trab, unidad_si])
     #print(simbolo_si, ' ', simbolo_trab,' =?',' ', unidad_si,'\n')
 
@@ -565,14 +464,13 @@ def set_var_indep(caso, contpalabra, lstDatos, unidades_trab, oracion, variable,
     # print(simbolo_si, ' ', simbolo_trab, ' =', valor, ' ', unidad_trab,' ',unidad_si,'\n')
 
 
-def detectar_vars(data, dfvar):
+def detectar_vars(data, dfvar, dict):
     ################## Detección de Variables ################################
 
     #data = pd.read_csv('enunciados.csv',sep='|',encoding = "ISO-8859-1")
     #print ('Texto Original\n',data['enunciados'][0])
     #print("\n")
-
-    filtros2(data)
+    filtros2(data, dict)
     '''
     La estructura del archivo  listadevariables2.csv, es la siguiente:
     nombrevar_simbolotrab|unidad_trab|simbolo_si|unidad_si|
@@ -629,12 +527,12 @@ def detectar_vars(data, dfvar):
             analizar_oracion(lst_oracion, unidades_trab, descripción,
                              unidades_si, variable, lst_dep, lst_indep)
 
-        #print('Referencia')
-        #print(contenunciado,'Datos de Entrada:\n',data['varindep'][contenunciado])
-        #print('Calcular:\n',data['vardep'][contenunciado])
-        #print('Identificados')
-        #print('Datos de Entrada:\n',lst_indep)
-        #print('Calcular:\n',lst_dep)
+        print('Referencia')
+        print(contenunciado,'Datos de Entrada:\n',data['varindep'][contenunciado])
+        print('Calcular:\n',data['vardep'][contenunciado])
+        print('Identificados')
+        print('Datos de Entrada:\n',lst_indep)
+        print('Calcular:\n',lst_dep)
         #input()
         #lista_estadisticas
 
@@ -678,9 +576,12 @@ def detectar_vars(data, dfvar):
 
 def test():
     import pandas as pd
-    data = pd.read_csv('emv/dataset/enunciadosCT.csv',sep='|')
-    dfvar = pd.read_csv('emv/dataset/listadevariables2.csv', sep='|')
-    filtros2(data)
+    # Load the data from a CSV file
+    data = pd.read_csv('../dataset/enunciadosCT1.csv',sep='|')
+    dfvar = pd.read_csv('../dataset/listadevariables2.csv', sep='|')
+    dict_text_to_descrip = file_to_dict("../dataset/convert_text_to_descripcion_SI.txt")
+    
+    filtros2(data, dict_text_to_descrip)
 
     descripción = dfvar['nombrevar_simbolotrab'] # Nombre de la variable
     unidades_trab = dfvar['unidad_trab'] # Unidades de trabajo
@@ -705,4 +606,7 @@ def test():
     print('Identificados')
     print('Datos de Entrada:\n',lst_indep)
     print('Calcular:\n',lst_dep)
-    input()
+    #input()
+    
+if __name__ == '__main__ ':
+    test()

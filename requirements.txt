@@ -1,6 +1,6 @@
 keras==2.1.2
 matplotlib==3.3.2
-nltk==3.5
-itertools
 pandas==1.1.5
 sklearn==0.19.2
+itertools
+nltk==3.5

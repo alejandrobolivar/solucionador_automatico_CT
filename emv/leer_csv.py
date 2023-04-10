@@ -6,13 +6,12 @@ Created on Thu Apr 15 09:08:55 2021
 """
 import pandas as pd
 
-data = pd.read_csv('dataset/enunciadosCT.csv',sep='|',usecols=['enunciados','modelos'])
+data = pd.read_csv('dataset/enunciadosCT_ciclo_3.csv',sep='|')
 
-data(['enunciados'])
+print(data(['enunciados']))
 
-'''
 for i in data:
-    print(data[i] )
+    print(data[i])
 
-resp = input('Pulse una tecla para finalizar...')
-'''
+
+
