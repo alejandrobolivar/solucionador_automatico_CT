@@ -1,13 +1,20 @@
 ﻿nombrevar_simbolotrab|unidad_trab|simbolo_si|unidad_si|
+aceleración angular:alfa|rad/s2,rev/min2|alfa|rad/s2
+aceleración:a,g:g,aceleración gravedad:g,aceleración media:am,aceleración tangencial:at,aceleración centrípeta:ac|m/s2,ft/s2|a|m/s2
+ángulo:ang|º|ang|º
+calor:q|kJ/kg,btu/lbm|q|kJ/kg
+coeficiente fricción:uk| |uk| 
+distancia:d,desplazamiento:d,radio:r,diámetro:d,altura:y,profundidad:y,mide:l,longitud:l,posición:x,posición inicial:xi,posición final:xf,altura máxima:ymax,alcance horizontal:alc,alcance máximo:alcmax|m,cm,km,ft,pulg|d|m
 entalpia:h|kJ/kg|h|kJ/kg
 entropia turbina:st,entropia bomba:sb|kJ/kg K|s|kJ/kg K
 flujo de calor suministrado:Qe|kW,MW|Qe|MW
-flujo másico vapor:fmv|kg/h,kg/s|fmv|kg/h
 flujo másico agua:fmagua|kg/h,kg/s|fma|kg/h
+flujo másico vapor:fmv|kg/h,kg/s|fmv|kg/h
 flujo másico:fm|kg/h,kg/s|fm|kg/h
 flujo volumétrico aire:fva|m3/min,m3/s,pie3/min,ft3/min|fv|m3/s
 fuerza centrípeta:Fc,fuerza:F,tensión:T|N,lbf|F|N
 masa:m|kg,lb,g|m|kg
+número revoluciones:n|rev|n|rev
 potencia neta:Wneta|MW,kW,hp|Pot|MW
 presión:P, presión media efectiva:P|Mpa,kPa,bar,psia|P|kPa
 relación compresión:rc| |rc| 
@@ -18,10 +25,3 @@ tiempo:t,tarda:t,tiempo vuelo:tv,tiempo máximo:tmax|s,min,h|t|s
 velocidad angular:w|rpm,rev/s,rad/s|w|rad/s
 velocidad:v,velocidad final:vf,velocidad inicial:vi,velocidad media:vm,velocidad promedio:vm,velocidad tangencial:vt,velocidad máxima:vmax,velocidad mínima:vmin|m/s,cm/s,km/h,ft/s,mi/h|v|m/s
 volumen cilindro:volcil|L,m3|V|m3
-ángulo:ang|º|ang|º
-aceleración angular:alfa|rad/s²,rev/min²|alfa|rad/s²
-aceleración:a,g:g,aceleración gravedad:g,aceleración media:am,aceleración tangencial:at,aceleración centrípeta:ac|m/s²,ft/s²|a|m/s²
-calor:q|kJ/kg,btu/lbm|q|kJ/kg
-coeficiente fricción:uk| |uk| 
-distancia:d,radio:r,diámetro:d,altura:y,profundidad:y,mide:l,longitud:l,posición:x,posición inicial:xi,posición final:xf,altura máxima:ymax,alcance horizontal:alc,alcance máximo:alcmax|m,cm,km,ft,pulg|d|m
-número revoluciones:n|rev|n|rev

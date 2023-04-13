@@ -1,46 +1,46 @@
-tiempo tarda:tiempo 
-tiempo tardo: tiempo
-cuánto tiempo:tiempo
-cuanto tardo: tiempo
-cuánto demora:tiempo
-cuanto demora: tiempo 
-distancia recorre: distancia 
-distancia recorrido: distancia
-distancia recorrida: distancia
-cuán lejos: distancia
-desplazamiento realizado:distancia
-cuánto desplaza:distancia
-máxima altura:altura máxima
-rapidez:velocidad
-máxima velocidad:velocidad máxima
-m/s cada segundo:m/s²
-metros por segundo:m/s
-segundos: s 
-seg: s 
-metros:m
-alcanzar reposo:velocidad final 0 m/s
-hasta detenerse:velocidad final 0 m/s
-detenerse completo:velocidad final 0 m/s
-detiene completo:velocidad final 0 m/s
-reposo:velocidad inicial 0 m/s
-velocidad uniformemente:velocidad
+aceleración constante:aceleración
 aceleración debida:aceleración
 aceleración permanece constante:aceleración
-x10^:E
-dos : 2 
-tres:3
-cuatro:4
+alcanzar reposo:velocidad final 0 m/s
+ángulo inclinación:ángulo
 cinco:5
+cuán lejos: distancia
+cuántas revoluciones:número revoluciones
+cuanto demora: tiempo 
+cuánto demora:tiempo
+cuánto desplaza:distancia
+cuánto pesará:masa
+cuanto tardo: tiempo
+cuánto tiempo:tiempo
+cuántos radianes:ángulo
+cuatro:4
+desplazamiento realizado:distancia
+detenerse completo:velocidad final 0 m/s
+detiene completo:velocidad final 0 m/s
+diez:10
+distancia recorre: distancia 
+distancia recorrida: distancia
+distancia recorrido: distancia
+duodécimo:12
+hasta detenerse:velocidad final 0 m/s
+m/s cada segundo:m/s2
+máxima altura:altura máxima
+máxima velocidad:velocidad máxima
+metros por segundo:m/s
+metros:m
+nueve:9
+número vueltas:número revoluciones
+º: º 
+ocho:8
+qué tan rápido gira:w
+rapidez:velocidad
+reposo:velocidad inicial 0 m/s
+segundos: s 
+seg: s
 seis:6
 siete:7
-ocho:8
-nueve:9
-diez:10
-duodécimo:12
-º: º 
-cuántos radianes:ángulo
-ángulo inclinación:ángulo
-cuántas revoluciones:número revoluciones
-número vueltas:número revoluciones
-qué tan rápido gira:w
-cuánto pesará:masa
+tiempo tarda:tiempo 
+tiempo tardo: tiempo
+tres:3
+velocidad uniformemente:velocidad
+x10^:E

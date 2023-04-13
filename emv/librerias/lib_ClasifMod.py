@@ -94,8 +94,17 @@ def filtros1(e): # Filtros aplicados a los enunciados
     # print ('Convertido en minúsculas\n', e['enunciados'][0])
     # print("\n")
     # Reemplaza los símbolos por espacio en blanco
-    e['enunciados'] = e['enunciados'].str.replace('[:,¿?()=²]', ' ', regex=True)
-
+    
+    specialChars = '[:,¿?()=²]'
+    for item, enunc in enumerate(e['enunciados']):
+        for specialChar in specialChars:
+            e['enunciados'][item] = e['enunciados'][item].replace(specialChar, '')
+    
+    #e['enunciados'] = e['enunciados'].str.replace('[:,¿?()=²]', ' ', regex=True)
+    
+    # Busca el caracter º y lo separa del valor del ángulo
+    e['enunciados'] = e['enunciados'].str.replace('º', ' º ', regex=True)
+    
     #Elimina las palabras vacías en español
     stop = stopwords.words('spanish')
     e['enunciados'] = e['enunciados'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
