@@ -13,6 +13,7 @@ cuánto pesará:masa
 cuanto tardo: tiempo
 cuánto tiempo:tiempo
 cuántos radianes:ángulo
+Cuántos radianes:ángulo
 cuatro:4
 desplazamiento realizado:distancia
 detenerse completo:velocidad final 0 m/s
@@ -35,8 +36,8 @@ ocho:8
 qué tan rápido gira:w
 rapidez:velocidad
 reposo:velocidad inicial 0 m/s
+revoluciones:rev
 segundos: s 
-seg: s
 seis:6
 siete:7
 tiempo tarda:tiempo 

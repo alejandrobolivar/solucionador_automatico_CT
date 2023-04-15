@@ -14,7 +14,7 @@ flujo másico:fm|kg/h,kg/s|fm|kg/h
 flujo volumétrico aire:fva|m3/min,m3/s,pie3/min,ft3/min|fv|m3/s
 fuerza centrípeta:Fc,fuerza:F,tensión:T|N,lbf|F|N
 masa:m|kg,lb,g|m|kg
-número revoluciones:n|rev|n|rev
+número revoluciones:n,revoluciones:n|rev|n|rev
 potencia neta:Wneta|MW,kW,hp|Pot|MW
 presión:P, presión media efectiva:P|Mpa,kPa,bar,psia|P|kPa
 relación compresión:rc| |rc| 

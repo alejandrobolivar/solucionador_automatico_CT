@@ -36,15 +36,19 @@ def analizar_oracion(oracion, unidades_trab, descripción, unidades_si, variable
     print(f'oracion = {oracion}')
     # input('analizar_oracion')
     while (contpalabra <= len(oracion)-1): # Recorre todas las parabras de las lista de palabras de la oración
-        print(oracion[contpalabra])
+        print(oracion[contpalabra], end=': ')
         # input()
-        
         '''
-        print(get_indice_simbolo_trab(oracion[contpalabra].replace('.',''), descripción) != -1)
-        print(contpalabra < len(oracion)-1 and get_indice_simbolo_trab(f"{oracion[contpalabra]} {oracion[contpalabra+1].replace('.', '')}", descripción) != -1)
+        La palabra es una variable
+        La palabra actual y la siguiente es una variable
+        Es un número y le sigue una unidad, excepto si le precede las palabras tabla o figura
+        '''
+        
+        print(get_indice_simbolo_trab(oracion[contpalabra].replace('.',''), descripción) != -1, end=' ')
+        print(contpalabra < len(oracion)-1 and get_indice_simbolo_trab(f"{oracion[contpalabra]} {oracion[contpalabra+1].replace('.', '')}", descripción) != -1, end=' ')
         print(es_numero(oracion[contpalabra]) and oracion[contpalabra-1] not in ['figura', 'tabla'] and 
         contpalabra < len(oracion)-1 and get_indice_unidad_trab(oracion[contpalabra+1].replace('.', ''), unidades_trab) != -1)
-        '''
+        
         
         if (get_indice_simbolo_trab(oracion[contpalabra].replace('.',''), descripción) != -1 or 
             (contpalabra < len(oracion)-1 and get_indice_simbolo_trab(f"{oracion[contpalabra]} {oracion[contpalabra+1].replace('.', '')}", descripción) != -1) or
@@ -57,6 +61,13 @@ def analizar_oracion(oracion, unidades_trab, descripción, unidades_si, variable
             # print(contpalabra,len(oracion),oracion)
             print('lstDatos->', lstDatos)
             # input()
+            
+            # se válida si la unidad corresponde con la descripción
+            if lstDatos[0] != '' and lstDatos[2] != '' and es_numero(lstDatos[2]):
+                if lstDatos[3] not in unidades_trab[get_indice_simbolo_trab(f"{oracion[contpalabra]} {oracion[contpalabra+1].replace('.', '')}",descripción)].split(',') and es_numero(lstDatos[2]):
+                    lstDatos[3]=''
+                    lstDatos[2]=''
+            
             caso = es_var_independiente(lstDatos, unidades_trab, descripción)
             print(f'caso = {caso}')
 
@@ -94,23 +105,23 @@ def conteo(lst1, lst2):
     i = 0
     # nl1=len(lst1)
     while i < len(lst1): # Referencia
-
         j = 0
-
         while j < len(lst2):  # Recorre toda lst2
             lst2[j][2] = lst2[j][2].strip()
             if lst1[i] == lst2[j]:
-
                 lst1.pop(i)
                 lst2.pop(j)
                 c += 1
                 i -= 1
                 break
-
             j += 1
-
         i += 1
 
+    if not lst1:
+        print(f'*** Encontró todas las variables *quedó* {lst1} *agregó* {lst2}')
+    else:
+        print(f'*** NO ENCONTRÓ *quedó* {lst1} *agregó* {lst2}')
+    
     # if c==len(lst1):
         # print('Todos acertados')
     # else:
@@ -138,13 +149,10 @@ def convertir_str_list(cad, n):
     j = 0
     # print(lst)
     for i in range(len(lst) // n):
-
         lst2 = []
-
         while j < (i + 1) * n:
             lst2.append(lst[j])
             j += 1
-
         lst3.append(lst2)
 
     # print(l3)
@@ -209,7 +217,6 @@ def es_var_independiente(lista_datos,unidades_trab,descripción):
     return caso
 
 
-
 def file_to_dict(file_name):
     result_dict = {}
     with open(file_name) as f:
@@ -231,8 +238,8 @@ def filtros2(e, dict):  # sourcery skip: avoid-builtin-shadow
         for key, val in dict.items():  # Recorre el diccionario de variables
             e['enunciados'][i] = e['enunciados'][i].replace(key, val)
 
-        print ('Simplificación ortografica %s \n',i,') ', e['enunciados'][i])
-        print("\n")
+        #print ('Simplificación ortografica %s \n',i,') ', e['enunciados'][i])
+        #print("\n")
 
 
 def get_indice_simbolo_trab(cad_descripcionvartrab, descripción):
@@ -271,7 +278,7 @@ def get_indice_unidad_trab(unid, unidades_trab):
     '''
     for i in range(len(unidades_trab)):
         for u in unidades_trab[i].split(','):
-            if unid == u.lower():
+            if unid.lower() == u.lower():
                 return i
     return -1
 
@@ -324,8 +331,8 @@ def print_resultados_enunciados(contninguno, conttotal, contindep, contdep,
     print('\nAnálisis de enunciados:')
     print(f'Total de enunciados analizados=\t {conttotal}')
     print('Desacierto en ambos y porcentaje=\t %d \t %.2f ' % (contninguno, (contninguno / conttotal * 100)),'%')
-    print('Porcentaje Aciertos Var Indep =\t %d \t %.2f ' % (contindep, (contindep / conttotal * 100)),'%')
-    print('Porcentaje Aciertos Var Dep =\t %d \t %.2f ' % (contdep, (contdep / conttotal * 100)),'%')
+    print('Porcentaje Aciertos de todas las Var Indep por enunciado =\t %d \t %.2f ' % (contindep, (contindep / conttotal * 100)),'%')
+    print('Porcentaje Aciertos de todas las Var Dep por enunciado =\t %d \t %.2f ' % (contdep, (contdep / conttotal * 100)),'%')
     print('Total de aciertos en ambos y porcentaje=\t %d \t %.2f' % (contambos, (contambos / conttotal * 100)),'%')
 
     print(f'Enunciados con Falla en ambos=\t {lstNinguno}')
@@ -432,7 +439,7 @@ def detectar_vars(data, dfvar, dict):
     ...
     De la misma forma se hace con las diversas variables.
     '''
-    print(data['enunciados'])
+    #print(data['enunciados'])
     descripción = dfvar['nombrevar_simbolotrab'] # Nombre de la variable
     unidades_trab = dfvar['unidad_trab'] # Unidades de trabajo
     variable = dfvar['simbolo_si'] # Símbolo según el SI
@@ -467,13 +474,13 @@ def detectar_vars(data, dfvar, dict):
 
         # Enunciado convertido en lista cuyos elementos son oraciones.
         lst_enunciado = data['enunciados'][contenunciado].split('. ')
-        #print(contenunciado,lst_enunciado)
+        print(contenunciado,lst_enunciado)
 
         contoracion = 0
         lst_dep = []  # Lista para almacenar variables dependientes
         lst_indep = []  # Lista para almacenar variables in dependientes
         for contoracion in range(len(lst_enunciado)): # Recorre cada oración del enunciado
-            #print('Siguiente oración',contoracion)
+            print('Siguiente oración',contoracion)
             #input()
 
             # Oración convertida en lista de palabras.
