@@ -20,9 +20,9 @@ from librerias.lib_IdVar import detectar_vars, file_to_dict
 # print("pandas version", pd.__version__)
 print("Leyendo datos de entrenamiento...")
 data = pd.read_csv('dataset/enunciadoscinematica124.csv',sep=';')  # ,encoding = "ISO-8859-1")
-
 clasificador(data)
-input('sdfsdfsdfs')
+
+input('<<< Pulse una tecla para continuar >>>')
 dfvar = pd.read_csv('dataset/listadevariables2.csv', sep='|')
 dict = file_to_dict("dataset/convert_text_to_descripcion_SI.txt")
 
