@@ -206,7 +206,7 @@ def clasificador(data):
     train_size = 0
 
     # Creación de los arrays de entrada y salida
-    train_size,test_size,enunciado_train,modelo_train,enunciado_test,modelo_test = dividir_datos(0.9,data)
+    train_size,test_size,enunciado_train,modelo_train,enunciado_test,modelo_test = dividir_datos(0.8,data)
 
     # Vectorizar los enunciados en un tensor de enteros 2D
     #print("Preparando el Tokenizer...")

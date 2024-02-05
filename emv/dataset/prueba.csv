@@ -1,2 +1,0 @@
-﻿enunciados;modelos;varindep;vardep
-Un automóvil mantiene una aceleración constante de 8 m/s2. Si su velocidad inicial era de 20 m/s al norte, ¿cuál será su velocidad después de 6 s?;MovimientoUniformementeAcelerado;[['a', '', '8', 'm/s2', 'm/s2'], ['v', 'vi', '20', 'm/s', 'm/s'], ['t', '', '6', 's', 's']];[['a', 'a', 'm/s2']
